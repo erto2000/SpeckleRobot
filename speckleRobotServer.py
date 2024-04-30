@@ -15,7 +15,7 @@ def startServer():
         return s, conn, addr
 
 
-def receiveShot(connection, filename='received_image.jpg'):
+def receiveShot(connection, filename=None):
     connection.sendall('take_shot'.encode())
 
     print("Receiving image...")
@@ -26,9 +26,14 @@ def receiveShot(connection, filename='received_image.jpg'):
             data_buffer += data[:-3]  # Append data excluding the last 3 bytes ('EOF')
             break
         data_buffer += data
-    with open(filename, 'wb') as f:
-        f.write(data_buffer)
-    print(f"Image received and saved as '{filename}'")
+
+    if filename is not None:
+        with open(filename, 'wb') as f:
+            f.write(data_buffer)
+        print(f"Image received and saved as '{filename}'")
+        return True
+    else:
+        return data_buffer
 
 
 if __name__ == "__main__":

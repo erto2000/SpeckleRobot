@@ -15,11 +15,12 @@ import seaborn as sns
 
 
 # Define constants
-dataset_path = 'D:\General Projects\Python Projects\Engineering_Project\SensiCut2021'
+dataset_path = 'D:\General Projects\Python Projects\Engineering_Project\Small'
 img_height, img_width = 224, 224
-num_classes = 60
+num_classes = 3
 batch_size = 64
 num_epochs = 1
+save_path = 'TrainedModels\model.pth'
 
 # Define data preprocessing and augmentation transforms
 data_transforms = {
@@ -145,6 +146,8 @@ print(conf_matrix)
 
 print('Training finished.')
 
+
+torch.save(model, save_path)
 # Plot confusion matrix as heatmap
 plt.figure(figsize=(10, 8))
 sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", cbar=False)
