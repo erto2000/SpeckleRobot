@@ -3,11 +3,11 @@ import keyboard
 import os
 
 dataset_folder = 'SpeckleRobotDataset'
-material_type = 'plastic'
+material_type = 'leather'
 
 server, connection, address = speckleRobotServer.startServer()
 
-currentShotCount = 1
+currentShotCount = 76
 while True:
     # If space is pressed, receive a shot
     fileName = f'{dataset_folder}/{material_type}/{material_type}_{currentShotCount}.jpg'

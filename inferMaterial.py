@@ -8,10 +8,19 @@ import io
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-# Start the server and receive an image
-server, connection, address = speckleRobotServer.startServer()
-img = speckleRobotServer.receiveShot(connection)
-img = Image.open(io.BytesIO(img))
+def getImage(connection):
+    global device
+    # Receive the image
+    img = speckleRobotServer.receiveShot(connection)
+    img = Image.open(io.BytesIO(img))
+
+    # Transform image
+    img = transform(img)
+    img = img.unsqueeze(0)  # Add a batch dimension
+    img = img.to(device)
+
+    return img
+
 
 # Define the same transformations as used during training
 transform = transforms.Compose([
@@ -26,17 +35,19 @@ model = torch.load('TrainedModels/model.pth')
 model.to(device)
 model.eval()  # Set the model to evaluation mode
 
-# Transform image
-img = transform(img)
-img = img.unsqueeze(0)  # Add a batch dimension
-img = img.to(device)
+server, connection, address = speckleRobotServer.startServer()
 
-print('reapering to predicy')
+while True:
+    img = getImage(connection)
 
-# Assuming the model and img are already loaded and transformed
-with torch.no_grad():
-    outputs = model(img)
-    _, predicted = torch.max(outputs, 1)
-    print(f'Predicted class: {predicted.item()}')
-
+    # Assuming the model and img are already loaded and transformed
+    with torch.no_grad():
+        outputs = model(img)
+        _, predicted = torch.max(outputs, 1)
+        if predicted.item() == 0:
+            print(f'Predicted class: {predicted.item()} - Leather')
+        elif predicted.item() == 1:
+            print(f'Predicted class: {predicted.item()} - Metal')
+        elif predicted.item() == 2:
+            print(f'Predicted class: {predicted.item()} - Wood')
 

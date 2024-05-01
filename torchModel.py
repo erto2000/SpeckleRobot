@@ -15,11 +15,11 @@ import seaborn as sns
 
 
 # Define constants
-dataset_path = 'D:\General Projects\Python Projects\Engineering_Project\Small'
+dataset_path = 'D:\General Projects\Python Projects\Engineering_Project\SpeckleRobotDataset'
 img_height, img_width = 224, 224
 num_classes = 3
-batch_size = 64
-num_epochs = 1
+batch_size = 16
+num_epochs = 5
 save_path = 'TrainedModels\model.pth'
 
 # Define data preprocessing and augmentation transforms
