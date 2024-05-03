@@ -15,7 +15,7 @@ import seaborn as sns
 
 
 # Define constants
-dataset_path = 'D:\General Projects\Python Projects\Engineering_Project\SpeckleRobotDataset'
+dataset_path = '/Users/mahirdemir/Desktop/pyhon_vs/git_interact/SpeckleRobot/SpeckleRobotDataset'
 img_height, img_width = 224, 224
 num_classes = 3
 batch_size = 16
@@ -101,7 +101,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.003)  # Optimize all parameters
 
 # Move model to GPU if available
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 model = model.to(device)
 
 # Training loop
