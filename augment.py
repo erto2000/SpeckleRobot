@@ -114,7 +114,7 @@ def creating_file_with_augmented_images(file_path_master_dataset, file_path_augm
 augmented_dataset = "/Users/mahirdemir/Desktop/pyhon_vs/git_interact/SpeckleRobot/SpeckleRobotDatasetAug"
 
 # master dataset path
-master_dataset = "/Users/mahirdemir/Desktop/pyhon_vs/git_interact/SpeckleRobot/SpeckleRobotDataset"
+master_dataset = "/Users/mahirdeamir/Desktop/pyhon_vs/git_interact/SpeckleRobot/SpeckleRobotDataset"
 
 # run the program
 

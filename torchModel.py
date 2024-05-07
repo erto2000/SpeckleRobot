@@ -15,10 +15,10 @@ import seaborn as sns
 
 
 # Define constants
-dataset_path = '/Users/mahirdemir/Desktop/pyhon_vs/git_interact/SpeckleRobot/SpeckleRobotDatasetAug'
+dataset_path = '/Users/mahirdemir/Desktop/pyhon_vs/git_interact/SpeckleRobot/SpeckleRobotDataset'
 img_height, img_width = 224, 224
 num_classes = 3
-batch_size = 64
+batch_size = 16
 num_epochs = 5
 save_path = 'TrainedModels\model.pth'
 
@@ -81,7 +81,7 @@ labels_encoded = encoder.fit_transform(labels)
 
 # Split dataset
 file_paths_train, file_paths_val, labels_train, labels_val = train_test_split(
-    file_paths, labels_encoded, test_size=0.2, random_state=42)
+    file_paths, labels_encoded, test_size=0.2, random_state=42, stratify=labels_encoded)
 
 # Create custom datasets and data loaders
 train_dataset = CustomDataset(file_paths_train, labels_train, transform=data_transforms['train'])
