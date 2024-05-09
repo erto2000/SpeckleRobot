@@ -15,12 +15,12 @@ import seaborn as sns
 
 
 # Define constants
-dataset_path = '/Users/mahirdemir/Desktop/pyhon_vs/git_interact/SpeckleRobot/SpeckleRobotDataset'
+dataset_path = '/Users/mahirdemir/Desktop/pyhon_vs/git_interact/SpeckleRobot/SpeckleRobotDataset_Upgraded'
 img_height, img_width = 224, 224
-num_classes = 3
-batch_size = 16
-num_epochs = 5
-save_path = 'TrainedModels\model.pth'
+num_classes = 14
+batch_size = 64
+num_epochs = 10
+save_path = 'TrainedModels\model_aug.pth'
 
 use_resnet_50 = True
 use_resnet_18 = False
