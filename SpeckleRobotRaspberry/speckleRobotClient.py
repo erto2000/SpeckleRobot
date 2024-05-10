@@ -1,6 +1,7 @@
 import socket
 import os
 from enum import Enum
+from PIL import Image
  
 image_file = 'image.jpg'
 
@@ -15,15 +16,17 @@ state = State.WAIT
 
 def takeShot():
     os.system(f'rpicam-jpeg -t 1 -o {image_file}')
+    with Image.open(image_file) as img:
+        img.save(image_file, "JPEG", quality=50)
 
 
 def sendShot(server):
     if os.path.exists('image.jpg'):
         with open('image.jpg', 'rb') as f:
-            bytesToSend = f.read(1024)
+            bytesToSend = f.read(8192)
             while bytesToSend:
                 server.send(bytesToSend)
-                bytesToSend = f.read(1024)
+                bytesToSend = f.read(8192)
             server.sendall(b'EOF')  # Signal the end of file transmission  # Signal that the file transfer is complete
             print("Image sent successfully.")
     else:

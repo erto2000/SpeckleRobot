@@ -21,7 +21,7 @@ def receiveShot(connection, filename=None):
     print("Receiving image...")
     data_buffer = b''
     while True:
-        data = connection.recv(1024)
+        data = connection.recv(8192)
         if data.endswith(b'EOF'):
             data_buffer += data[:-3]  # Append data excluding the last 3 bytes ('EOF')
             break
